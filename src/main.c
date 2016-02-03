@@ -5,8 +5,10 @@
 ** Login   <jacque_x@epitech.net>
 ** 
 ** Started on  Mon Feb  1 10:36:04 2016 JACQUET Vincent
-** Last update Tue Feb  2 11:31:09 2016 JACQUET Vincent
+** Last update Wed Feb  3 15:14:28 2016 JACQUET Vincent
 */
+
+#include "../include/malloc.h"
 
 int	main()
 {

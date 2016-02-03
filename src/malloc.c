@@ -5,15 +5,19 @@
 ** Login   <jacque_x@epitech.net>
 ** 
 ** Started on  Tue Feb  2 11:28:49 2016 JACQUET Vincent
-** Last update Tue Feb  2 11:31:55 2016 JACQUET Vincent
+** Last update Wed Feb  3 15:15:14 2016 JACQUET Vincent
 */
 
-#include <unistd.h>
-#include <stdio.h>
+#include "../include/malloc.h"
 
 void	*malloc(size_t size)
 {
-  return (NULL);
+  void		*ptr;
+
+  ptr = sbrk(0);
+  if ((sbrk(size)) == (void *) - 1)
+    return (NULL);
+  return (ptr);
 }
 
 void	*realloc(void *ptr, size_t size)
@@ -23,5 +27,10 @@ void	*realloc(void *ptr, size_t size)
 
 void	free(void *ptr)
 {
+  
+}
 
+void	show_alloc_mem()
+{
+  
 }

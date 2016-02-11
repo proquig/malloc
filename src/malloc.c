@@ -5,32 +5,90 @@
 ** Login   <jacque_x@epitech.net>
 ** 
 ** Started on  Tue Feb  2 11:28:49 2016 JACQUET Vincent
-** Last update Wed Feb  3 15:15:14 2016 JACQUET Vincent
+** Last update Thu Feb 11 09:56:43 2016 Guillaume PROQUIN
 */
 
-#include "../include/malloc.h"
+#include "malloc.h"
 
-void	*malloc(size_t size)
+void	*INIT = NULL;
+
+void		*malloc(size_t size)
 {
-  void		*ptr;
+  t_mem		*mem;
 
-  ptr = sbrk(0);
-  if ((sbrk(size)) == (void *) - 1)
+  if (!INIT)
+    mem = init_mem(size);
+  else
+    if(!(mem = find_mem(size)))
+      mem = init_mem(size);
+    else
+      mem->free = 0;
+  if (!mem)
     return (NULL);
-  return (ptr);
+  return (mem->ptr);
+}
+
+void		free(void *ptr)
+{
+  t_mem		*mem;
+
+  mem = INIT;
+  while (mem)
+    {
+      if (ptr == (void*)mem + sizeof(t_mem))
+	{
+	  mem->free = 1;
+	  if (!mem->next)
+	    {
+	      if (mem->prev)
+		mem->prev->next = NULL;
+	      else
+		INIT = NULL;
+	      brk(mem);
+	      mem = NULL;
+	    }
+	  return ;
+	}
+      if (mem)
+	mem = mem->next;
+    }
 }
 
 void	*realloc(void *ptr, size_t size)
 {
+  t_mem	*mem;
+  t_mem	*tmp;
+
+  tmp = INIT;
+  if (!size)
+    {
+      free(ptr);
+      return (NULL);
+    }
+  while (tmp)
+    {
+      if (ptr == (void*)tmp + sizeof(t_mem))
+	{
+	  mem = malloc(size);
+	  memcpy(mem, ptr, tmp->size);
+	  free(ptr);
+	  ptr = mem;
+	  return (ptr);
+	}
+      tmp = tmp->next;
+    }
   return (NULL);
 }
 
-void	free(void *ptr)
+void		show_alloc_mem()
 {
-  
-}
+  t_mem		*mem;
 
-void	show_alloc_mem()
-{
-  
+  printf("break : %p\n", sbrk(0));
+  mem = INIT;
+  while (mem)
+    {
+      printf("%p - %p : %zu bytes\n", mem, (void*)mem + mem->size, mem->size);
+      mem = mem->next;
+    }
 }

@@ -5,29 +5,28 @@
 ## Login   <jacque_x@epitech.net>
 ## 
 ## Started on  Mon Feb  1 10:05:19 2016 JACQUET Vincent
-## Last update Tue Feb  2 11:31:27 2016 JACQUET Vincent
+## Last update Thu Feb 11 09:56:58 2016 Guillaume PROQUIN
 ##
 
-SRC	=	src/main.c	\
-		src/malloc.c
+SRC	=	src/malloc.c	\
+		src/mem.c
 
 OBJ	=	$(SRC:.c=.o)
 
-CFLAGS	=	-W -Wall -Wextra -Werror
+CFLAGS	=	-W -Wall -Wextra -Werror -fPIC \
+		-I include/
 
-NAME	=	malloc
+NAME	=	libmy_malloc.so
 
-all	:	$(NAME)
+all:		$(NAME)
 
-$(NAME)	:	$(OBJ)
-	gcc -o $(NAME) $(OBJ)
+$(NAME):	$(OBJ)
+		gcc -o $(NAME) $(OBJ) -shared
 
-clean	:
-	rm -rf $(OBJ)
+clean:
+		rm -rf $(OBJ)
 
-fclean	:	clean
-	rm -rf $(NAME)
+fclean:		clean
+		rm -rf $(NAME)
 
-re	:	fclean all
-
-
+re:		fclean all

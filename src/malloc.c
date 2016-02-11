@@ -5,7 +5,7 @@
 ** Login   <jacque_x@epitech.net>
 ** 
 ** Started on  Tue Feb  2 11:28:49 2016 JACQUET Vincent
-** Last update Thu Feb 11 09:56:43 2016 Guillaume PROQUIN
+** Last update Thu Feb 11 10:07:01 2016 Guillaume PROQUIN
 */
 
 #include "malloc.h"
@@ -60,6 +60,8 @@ void	*realloc(void *ptr, size_t size)
   t_mem	*tmp;
 
   tmp = INIT;
+  if (!ptr)
+    return (malloc(size));
   if (!size)
     {
       free(ptr);

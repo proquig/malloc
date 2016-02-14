@@ -5,7 +5,7 @@
 ## Login   <jacque_x@epitech.net>
 ## 
 ## Started on  Mon Feb  1 10:05:19 2016 JACQUET Vincent
-## Last update Thu Feb 11 09:56:58 2016 Guillaume PROQUIN
+## Last update Sat Feb 13 13:34:14 2016 Guillaume PROQUIN
 ##
 
 SRC	=	src/malloc.c	\
@@ -30,3 +30,6 @@ fclean:		clean
 		rm -rf $(NAME)
 
 re:		fclean all
+
+dbg:		CFLAGS += -g
+dbg:		re

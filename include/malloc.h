@@ -5,16 +5,16 @@
 ** Login   <jacque_x@epitech.net>
 ** 
 ** Started on  Tue Feb  2 11:34:03 2016 JACQUET Vincent
-** Last update Thu Feb 11 09:53:13 2016 Guillaume PROQUIN
+** Last update Sat Feb 13 17:31:34 2016 Guillaume PROQUIN
 */
 
 #ifndef		__MALLOC_H__
-#define		__MALLOC_H__
+# define       	__MALLOC_H__
 
-#include	<unistd.h>
-#include	<stdlib.h>
-#include	<stdio.h>
-#include	<string.h>
+# include	<unistd.h>
+# include	<stdlib.h>
+# include	<stdio.h>
+# include	<string.h>
 
 typedef struct	s_mem
 {
@@ -27,9 +27,10 @@ typedef struct	s_mem
 
 t_mem		*find_mem(size_t size);
 t_mem		*init_mem(size_t size);
+void		free(void *ptr);
 void		*malloc(size_t size);
 void		*realloc(void *ptr, size_t size);
-void		free(void *ptr);
+void		*calloc(size_t nmemb, size_t size);
 void		show_alloc_mem();
 
 #endif
